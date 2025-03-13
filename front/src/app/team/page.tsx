@@ -115,7 +115,7 @@ export default function Home() {
           <h1 className="text-4xl font-semibold pt-5">PokeAPI</h1>
           <div className="justify-center gap-60 flex p-5 text-2xl w-4/5  rounded-sm">
             <button className={style.botao} onClick={() => openModal()}>Capturar</button>
-            <Link href={"team"} className={style.botao} >Seu Time</Link>
+            <Link href={"2"} className={style.botao}>Pokemons Selvagens</Link>
           </div>
         </div>
         <div className="w-full flex flex-row justify-center flex-wrap gap-5 p-20 pt-40">
@@ -150,27 +150,6 @@ export default function Home() {
           >
             Próxima Página
           </button>
-        </div>
-
-        {/* Modal nova captura*/}
-        <div className={modal ? "fixed inset-0 flex items-center justify-center text-white dark:text-black bg-black bg-opacity-50 z-50" : "disabled z-0 fixed opacity-0 hidden"}>
-          <div className="bg-blue-600 dark:bg-slate-50 p-8 rounded-lg shadow-lg flex items-center justify-center flex-col" >
-            <div className="p-2 flex flex-col w-96 bg-opacity-50 z-50">
-              <h2 className="text-xl font-semibold">Nova captura</h2>
-              <form className="flex flex-col">
-                <label htmlFor="" className="mt-8">Numero do pokémon</label>
-                <input type="text" placeholder="Pokemon Selvagem" className="text-gray-800 border-2 rounded-[5px] p-1 mt-1 text-[13px]" value={title} onChange={(e) => { setTitle(e.target.value) }} ></input>
-                <label htmlFor="" className="mt-8">Numero do seu pokémon</label>
-                <input type="text" placeholder="Seu Pokemon" className="text-gray-800 border-2 rounded-[5px] p-1 mt-1 text-[13px]" value={description} onChange={(e) => { setDescription(e.target.value) }} ></input>
-                <label htmlFor="" className="mt-8">Numero da pokebola</label>
-                <input type="text" placeholder="Pokebola" className="text-gray-800 border-2 rounded-[5px] p-1 mt-1 text-[13px]" value={description} onChange={(e) => { setDescription(e.target.value) }} ></input>
-              </form>
-              <div className="flex justify-between mt-10">
-                <button onClick={() => closeModal()} className="flex justify-center items-center h-8 text-[15px] bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Cancelar</button>
-                <button onClick={() => handleNewTask()} className="flex justify-center items-center h-8 text-[15px] bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Confirmar</button>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
     </>
