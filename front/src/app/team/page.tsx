@@ -29,6 +29,7 @@ export default function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
+  const [poke, setPoke] = useState<number>(0);
 
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
@@ -40,35 +41,30 @@ export default function Home() {
 
   const fetchPokemons = async (pageNumber: number) => {
     try {
-      // Buscando os pokémons da página atual
+
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${20 * (pageNumber - 1)}`
       );
 
       const results = response.data.results;
-      const pokemonPromises = results.map((item: { url: string }) => axios.get(item.url));  // Criando promessas para buscar cada pokémon
+      const pokemonPromises = results.map((item: { url: string }) => axios.get(item.url)); 
 
-      // Esperando todas as requisições de detalhes dos pokémons
       const pokemonResponses = await Promise.all(pokemonPromises);
 
-      // Pegando os dados dos pokémons
       const pokemonData: Pokemon[] = pokemonResponses.map((res) => res.data);
 
-      // Ordenando os pokémons pela ID
       pokemonData.sort((a: Pokemon, b: Pokemon) => a.id - b.id);
 
-      // Atualizando o estado com os pokémons ordenados
       setPokemons(pokemonData);
     } catch (error) {
       console.error("Erro ao buscar pokémons: ", error);
     } finally {
-      setLoading(false);  // Finaliza o loading
+      setLoading(false);  
     }
   };
 
-  // Usando useEffect para carregar os pokémons quando a página for carregada
   useEffect(() => {
-    fetchPokemons(page);  // Chama a função de busca dos pokémons
+    fetchPokemons(page);  
   }, [page]);
 
   const closeModal = () => {
@@ -78,6 +74,7 @@ export default function Home() {
   }
 
   const openModal = () => {
+    setPoke(Math.floor(Math.random() * 1025) + 1)
     setModal(true);
   }
 
@@ -139,14 +136,14 @@ export default function Home() {
         <div className=" fixed bottom-5">
           <button
             className="p-2 bg-blue-700 rounded-md px-5 hover:bg-blue-800 transition border-2"
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))} // Decrementa a página, sem passar de 1
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))} 
             disabled={page === 1}
           >
             Página Anterior
           </button>
           <button
             className="p-2 bg-blue-700 rounded-md px-5 hover:bg-blue-800 transition ml-2 border-2"
-            onClick={() => setPage((prev) => prev + 1)} // Incrementa a página
+            onClick={() => setPage((prev) => prev + 1)} 
           >
             Próxima Página
           </button>
