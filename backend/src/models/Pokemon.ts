@@ -11,6 +11,7 @@ interface IPokemon extends Document {
 }
 
 const pokeSchema: Schema = new Schema({
+    id: { type: Number, required: true },
     name: { type: String, required: false },
     height: { type: Number, required: false },
     weight: { type: Number, required: false },

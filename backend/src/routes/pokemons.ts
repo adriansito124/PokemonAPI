@@ -12,7 +12,7 @@ router.post('', async (req: Request, res: Response) => {
     try {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_id}`);
         
-        const { name, base_experience, sprites, height, weight } = response.data;
+        const { name, base_experience, sprites, height, weight, id } = response.data;
 
 
         const spriteUrl = shiny ? sprites.front_shiny : sprites.front_default;
@@ -24,6 +24,7 @@ router.post('', async (req: Request, res: Response) => {
             height,
             weight,
             shiny, 
+            id,
             sprites: { front_shiny: sprites.front_shiny, front_default: sprites.front_default }
         });
 
